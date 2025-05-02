@@ -10,6 +10,7 @@ class Token extends Model
     protected $table = 'token';
 
     protected $fillable = [
+        'id_credential',
         'id_person',
         'token',
         'expires_at',

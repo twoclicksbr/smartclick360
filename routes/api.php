@@ -4,10 +4,14 @@ use App\Http\Controllers\Api\CredentialController;
 use App\Http\Controllers\Api\PersonController;
 use App\Http\Controllers\Api\PersonUserController;
 use App\Http\Controllers\Api\TokenController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\AuthController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Middleware\CheckToken;
+
+Route::prefix('auth')->group(function () {
+    Route::post('/login', [AuthController::class, 'login']);
+});
 
 Route::prefix('admin')->middleware(CheckToken::class)->group(function () {
     Route::prefix('credential')->group(function () {
