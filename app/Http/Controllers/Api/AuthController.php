@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\LoginRequest as ApiLoginRequest;
-use App\Http\Requests\LoginRequest;
 use App\Models\Api\Token as ApiToken;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -28,17 +28,26 @@ class AuthController extends Controller
 
         ApiToken::create([
             'id_credential' => $user->id_credential,
-            'id_person' => $user->id_person,
-            'token' => $token,
-            'expires_at' => $expiresAt,
+            'id_person'     => $user->id_person,
+            'token'         => $token,
+            'expires_at'    => $expiresAt,
         ]);
 
         return response()->json([
             'idCredential' => $user->id_credential,
-            'username' => $user->credential->username,
-            'token' => $token,
-            'idPerson' => $user->id_person,
-            'name' => $user->person->name,
+            'username'     => $user->credential->username,
+            'token'        => $token,
+            'idPerson'     => $user->id_person,
+            'name'         => $user->person->name,
         ]);
+    }
+
+    public function logout(Request $request)
+    {
+        $tokenHeader = $request->header('token');
+
+        ApiToken::where('token', $tokenHeader)->delete();
+
+        return response()->json(['success' => 'Logout realizado com sucesso.']);
     }
 }

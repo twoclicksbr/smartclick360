@@ -13,6 +13,9 @@ Route::prefix('auth')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
 });
 
+Route::middleware(CheckToken::class)->post('/auth/logout', [AuthController::class, 'logout']);
+
+
 Route::prefix('admin')->middleware(CheckToken::class)->group(function () {
     Route::prefix('credential')->group(function () {
         Route::get('/', [CredentialController::class, 'index']);
