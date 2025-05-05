@@ -1,6 +1,6 @@
 @extends('layouts.auth')
 
-@section('title', 'Login')
+@section('title', 'Desbloquear')
 
 @section('content')
     <div class="auth-page-wrapper auth-bg-cover py-5 d-flex justify-content-center align-items-center min-vh-100">
@@ -47,19 +47,14 @@
                                 {{-- Direita com formulário --}}
                                 <div class="col-lg-6">
                                     <div class="p-lg-5 p-4">
-                                        <h5 class="text-primary">Bem vindo!</h5>
-                                        <p class="text-muted">Acesse o SmartClick360.</p>
+                                        <h5 class="text-primary">Olá, {{ explode(' ', session('name'))[0] }} 👋</h5>
+                                        <p class="text-muted">Digite sua senha para continuar no SmartClick360.</p>
 
-                                        @if ($errors->has('error'))
-                                            <!-- Danger Alert -->
-                                            <div class="alert alert-danger alert-dismissible fade show material-shadow"
-                                                role="alert">
-                                                {{ $errors->first('error') }}
-                                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                                    aria-label="Close"></button>
+                                        @if (session('error'))
+                                            <div class="alert-dismissible alert-danger mt-2">
+                                                {{ session('error') }}
                                             </div>
                                         @endif
-
 
                                         @if (session('success'))
                                             <!-- Success Alert -->
@@ -71,42 +66,50 @@
                                             </div>
                                         @endif
 
-                                        <form method="POST" action="{{ route('auth.login') }}">
-                                            @csrf
 
-                                            <div class="mb-3">
-                                                <label for="email" class="form-label">E-mail</label>
-                                                <input type="text" class="form-control" id="email" name="email"
-                                                    required autofocus>
-                                            </div>
+                                        <div class="mt-4">
 
-                                            <div class="mb-3">
-                                                <label for="password-input" class="form-label">Senha</label>
-                                                <div class="position-relative auth-pass-inputgroup mb-3">
-                                                    <input type="password" class="form-control pe-5 password-input"
-                                                        name="password" id="password-input" required>
-                                                    <button
-                                                        class="btn btn-link position-absolute end-0 top-0 text-muted password-addon"
-                                                        type="button" id="password-addon">
-                                                        <i class="ri-eye-fill align-middle"></i>
-                                                    </button>
+                                            @if ($errors->has('error'))
+                                                <!-- Danger Alert -->
+                                                <div class="alert alert-danger alert-dismissible fade show material-shadow"
+                                                    role="alert">
+                                                    {{ $errors->first('error') }}
+                                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                        aria-label="Close"></button>
                                                 </div>
-                                            </div>
+                                            @endif
 
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="remember">
-                                                <label class="form-check-label" for="remember">Lembrar-me</label>
-                                            </div>
+                                            <form method="POST" action="{{ route('auth.unlock') }}">
+                                                @csrf
+                                                <input type="hidden" name="email" value="{{ session('email') }}">
 
-                                            <div class="mt-4">
-                                                <button class="btn btn-success w-100" type="submit">Entrar</button>
-                                            </div>
-                                        </form>
+                                                <div class="mb-3">
+                                                    <label for="password-input" class="form-label">Senha</label>
+                                                    <div class="position-relative auth-pass-inputgroup mb-3">
+                                                        <input type="password" class="form-control pe-5 password-input"
+                                                            name="password" id="password-input" required>
+                                                        <button
+                                                            class="btn btn-link position-absolute end-0 top-0 text-muted password-addon"
+                                                            type="button" id="password-addon">
+                                                            <i class="ri-eye-fill align-middle"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-2 mt-4">
+                                                    <button type="submit"
+                                                        class="btn btn-success w-100">Desbloquear</button>
+                                                </div>
+                                            </form>
+
+                                            <!-- end form -->
+                                        </div>
 
                                         <div class="mt-5 text-center">
-                                            <p class="mb-0">Não tem uma conta? <a href="#"
-                                                    class="fw-semibold text-primary text-decoration-underline">Confira os
-                                                    Planos</a></p>
+                                            <p class="mb-0">Não sou {{ explode(' ', session('name'))[0] }}! <a
+                                                    href="{{ route('logout') }}"
+                                                    class="fw-semibold text-primary text-decoration-underline">Desconectar</a>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>

@@ -18,7 +18,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        // \App\Http\Middleware\CheckSession::class;
+
+        $middleware->alias([
+            'check.session' => \App\Http\Middleware\CheckSession::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->renderable(function (NotFoundHttpException $e, $request) {
