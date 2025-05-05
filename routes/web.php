@@ -1,20 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', fn() => view('welcome'));
+Route::get('/login', fn() => view('auth.login'));
+Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
 
-Route::get('/debug-timezone', function () {
-    $timezone = DB::select("SELECT @@session.time_zone as tz")[0]->tz;
-    return [
-        'agora' => now()->toDateTimeString(),
-        'timezone_mysql' => $timezone,
-    ];
-});
-
-Route::get('/credential-time', function () {
-    return \App\Models\Api\Credential::find(1);
-});
+Route::view('/admin/home', 'admin.home')->middleware('web');
