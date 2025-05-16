@@ -1,0 +1,17 @@
+{
+    "sEmptyTable": "Nenhum registro encontrado",
+    "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+    "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+    "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+    "sLengthMenu": "_MENU_\u00A0\u00A0registros",
+    "sLoadingRecords": "Carregando...",
+    "sProcessing": "Processando...",
+    "sSearch": "Pesquisar:",
+    "sZeroRecords": "Nenhum registro encontrado",
+    "oPaginate": {
+        "sFirst": "Primeiro",
+        "sLast": "Último",
+        "sNext": "Próximo",
+        "sPrevious": "Anterior"
+    }
+}

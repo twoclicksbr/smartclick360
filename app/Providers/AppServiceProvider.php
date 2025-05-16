@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\App;
 use Illuminate\Console\Scheduling\Schedule;
 
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\View;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -36,5 +39,8 @@ class AppServiceProvider extends ServiceProvider
                 $schedule->command('tokens:clear-expired')->twiceDaily(7, 19);
             });
         }
+
+        Blade::componentNamespace('App\\View\\Components', 'app'); // já deve existir
+        Blade::anonymousComponentPath(resource_path('views/site/metronic-8/components'));
     }
 }

@@ -1,35 +1,39 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\LoginViewController;
 use App\Http\Middleware\CheckSession;
 
-#### Site
-Route::get('/', fn() => view('welcome'));
+use App\Http\Controllers\Sys\CredentialController;
 
-#### Login
-Route::get('/login', fn() => view('auth.login'));
-Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
+Route::get('/', function () {
+    return view('metronic.site.landing');
+});
 
-#### Bloquear
-Route::get('/lock', function () {
-    session(['locked' => true]);
-    return redirect()->route('auth.lock.screen');
+Route::get('/auth/login', function () {
+    return view('metronic.auth.login');
+});
+
+Route::post('/auth/login', [AuthController::class, 'login'])->name('login.post');
+Route::get('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
+Route::get('/auth/login', [LoginViewController::class, 'show'])->name('auth.login');
+
+Route::get('/auth/lock', function () {
+    return view('metronic.auth.lock-screen');
 })->name('auth.lock');
 
-Route::view('/auth/lock-screen', 'auth.lockscreen')->name('auth.lock.screen');
-Route::post('/auth/unlock', [AuthController::class, 'unlock'])->name('auth.unlock');
+Route::post('/auth/unlock', [AuthController::class, 'unlock'])->name('unlock');
+
+Route::middleware([CheckSession::class])->prefix('sys')->group(function () {
+    Route::get('/', fn() => view('metronic.system.home'))->name('sys.home');
+
+    Route::get('/credential', [CredentialController::class, 'index'])->name('sys.credential');
+
+    // Route::get('/credential', fn() => view('metronic.system.credential'))->name('sys.credential');
+    // outras rotas aqui
 
 
-#### Logout
-Route::get('/logout', function () {
-    session()->flush();
-    return redirect('/login')->with('success', 'Desconectado com sucesso.');
-})->name('logout');
-
-
-
-#### Rotas Admin
-Route::middleware([CheckSession::class])->prefix('admin')->group(function () {
-    Route::view('/home', 'admin.home');
+    // Proxy universal para qualquer chamada de API
+    Route::match(['get', 'post', 'put', 'delete'], '/api/{path}', fn() => null)->where('path', '.*');
 });

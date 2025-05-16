@@ -1,0 +1,108 @@
+/* Oculta ícones de ordenação nas colunas marcadas como no-sort */
+table.dataTable thead th.no-sort.sorting::after,
+table.dataTable thead th.no-sort.sorting_asc::after,
+table.dataTable thead th.no-sort.sorting_desc::after,
+table.dataTable thead th.no-sort::after,
+table.dataTable thead th.no-sort::before {
+    display: none !important;
+}
+
+table.dataTable td:first-child {
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+
+
+
+/* Garante alinhamento vertical e padding padrão */
+#sc360_credential_table th,
+#sc360_credential_table td {
+    vertical-align: middle !important;
+    padding-top: 0.65rem !important;
+    padding-bottom: 0.65rem !important;
+}
+
+/* Força alinhamento com flexbox */
+#sc360_credential_table td,
+#sc360_credential_table th {
+    display: flex !important;
+    align-items: center !important;
+}
+
+/* Checkbox (1ª coluna) */
+#sc360_credential_table th:nth-child(1),
+#sc360_credential_table td:nth-child(1) {
+    justify-content: center !important;
+    width: 40px !important;
+    padding: 0 !important;
+}
+
+/* ID (2ª coluna) */
+#sc360_credential_table th:nth-child(2),
+#sc360_credential_table td:nth-child(2) {
+    justify-content: flex-start !important;
+    width: 60px !important;
+}
+
+/* Usuário (3ª coluna) */
+#sc360_credential_table th:nth-child(3),
+#sc360_credential_table td:nth-child(3) {
+    justify-content: flex-start !important;
+}
+
+/* Demais colunas centralizadas */
+#sc360_credential_table th:nth-child(n+4),
+#sc360_credential_table td:nth-child(n+4) {
+    justify-content: center !important;
+}
+
+
+
+
+
+
+
+
+
+
+/* Força vertical-align para TODAS as células */
+#sc360_credential_table th,
+#sc360_credential_table td {
+    vertical-align: middle !important;
+}
+
+/* Checkbox (coluna 1) */
+#sc360_credential_table th:nth-child(1),
+#sc360_credential_table td:nth-child(1) {
+    text-align: center !important;
+    width: 40px !important;
+    padding: 0 !important;
+}
+
+/* ID (coluna 2) */
+#sc360_credential_table th:nth-child(2),
+#sc360_credential_table td:nth-child(2) {
+    text-align: left !important;
+    width: 60px !important;
+}
+
+/* Usuário (coluna 3) */
+#sc360_credential_table th:nth-child(3),
+#sc360_credential_table td:nth-child(3) {
+    text-align: left !important;
+}
+
+/* Colunas 4 a 7 (centralizadas) */
+#sc360_credential_table th:nth-child(4),
+#sc360_credential_table td:nth-child(4),
+#sc360_credential_table th:nth-child(5),
+#sc360_credential_table td:nth-child(5),
+#sc360_credential_table th:nth-child(6),
+#sc360_credential_table td:nth-child(6),
+#sc360_credential_table th:nth-child(7),
+#sc360_credential_table td:nth-child(7) {
+    text-align: center !important;
+}
+
