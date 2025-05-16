@@ -53,7 +53,7 @@
     </div>
 
     @yield('drawers')
-    @yield('modals')
+    {{-- @yield('modals') --}}
     @yield('scripts')
 
 </body>

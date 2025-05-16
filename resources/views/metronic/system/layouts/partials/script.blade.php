@@ -119,7 +119,7 @@
             const search = searchInput?.value.toLowerCase() || '';
             const searchId = searchIdInput?.value || '';
             const ids = expandIdList(searchId);
-            const status = $('[data-sc360-filter="status"]').val() || '';
+            const status = document.getElementById('sc360_{{ $module }}_status')?.value || '';
             const master = $('[data-sc360-filter="master"]').val() || '';
             const validity = validityInput?.value || '';
             const dateType = $('#date-type-filter').val() || 'updated_at';
@@ -189,7 +189,7 @@
             const data = {
                 search: searchInput?.value || '',
                 searchId: searchIdInput?.value || '',
-                status: $('[data-sc360-filter="status"]').val() || '',
+                status: document.getElementById('sc360_{{ $module }}_status')?.value || '',
                 master: $('[data-sc360-filter="master"]').val() || '',
                 dateType: $('#date-type-filter').val() || '',
                 dateRange: $('#sc360_{{ $module }}_date_filter').val() || '',
@@ -207,7 +207,7 @@
             $('#sc360_{{ $module }}_date_filter').val(data.dateRange || '');
             $('#sc360_{{ $module }}_date_validity').val(data.validity || '');
             $('[data-sc360-filter="status"]').val(data.status || '').trigger('change');
-            $('[data-sc360-filter="master"]').val(data.master || '').trigger('change');
+            $('#sc360_{{ $module }}_status').val(data.status || '').trigger('change.select2');
             searchInput.value = data.search || '';
             searchIdInput.value = data.searchId || '';
         }
@@ -225,8 +225,8 @@
 
         // Inicializações
         initDataTable();
-        searchInput = document.querySelector('[data-kt-ecommerce-order-filter="search"]');
-        searchIdInput = document.querySelector('[data-kt-ecommerce-order-filter="search-id"]');
+        searchInput = document.getElementById('sc360_{{ $module }}_search');
+        searchIdInput = document.getElementById('sc360_{{ $module }}_search_id');
         validityInput = document.getElementById('sc360_{{ $module }}_date_validity');
         validityClearBtn = document.getElementById('sc360_{{ $module }}_date_validity_clear');
 

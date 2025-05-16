@@ -28,10 +28,9 @@ Route::post('/auth/unlock', [AuthController::class, 'unlock'])->name('unlock');
 Route::middleware([CheckSession::class])->prefix('sys')->group(function () {
     Route::get('/', fn() => view('metronic.system.home'))->name('sys.home');
 
-    Route::get('/credential', [CredentialController::class, 'index'])->name('sys.credential');
+    Route::get('/credential', [CredentialController::class, 'index'])->name('sys.credential.index');
 
-    // Route::get('/credential', fn() => view('metronic.system.credential'))->name('sys.credential');
-    // outras rotas aqui
+
 
 
     // Proxy universal para qualquer chamada de API

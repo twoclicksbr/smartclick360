@@ -22,6 +22,6 @@ class CredentialController extends Controller
         // Agora sim: extrai os dados da API
         $credentials = $response->json()['credential']['data'] ?? [];
 
-        return view('metronic.system.credential', compact('credentials'));
+        return view('metronic.system.credential.index', compact('credentials'));
     }
 }
