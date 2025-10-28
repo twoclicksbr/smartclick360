@@ -52,7 +52,9 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://smartclick360.test'),
+    'api_url' => env('APP_URL_API', 'http://smartclick360.test/api'),
+
 
     /*
     |--------------------------------------------------------------------------
